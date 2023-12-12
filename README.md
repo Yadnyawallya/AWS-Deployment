@@ -42,42 +42,41 @@ ssh -i instance.pem ubunutu@<IP_ADDRESS>
    sudo cp -R /home/ec2-user/dist/project /data/nginx.
 - 5. now path wiil be
   /data/nginx/project   ---webroot
+
 ## nginx  configuration setting
- - 1. Change the Directory.
+
+-  Change the Directory.
       cd /etc/nginx
- - 2. Hit the ls command
+ -  Hit the ls command
    -- go to conf.d
    -- cd conf.d
- - 3. Create the new file using VIM command
+ -  Create the new file using VIM command
     1.sudo vim ang-test-01.conf
- - 4.  Add the Server configuration file.   
-  ` server {
-	   listen 80;
-	  server_name example.com;
-	      root /var/www/html;
-	       index index.html;
-	  location / {
-	 try_files $uri $uri / /index.html;
-	 }
-
- }`
- 
-- 5. Check the Cofiguration details on My Project do exact same as shown in Example.
- `server {
-	listen 80;
-	server_name 3.111.217.205;  // your ec2 instance public IP address 
-	
-	root /data/nginx/project;   //folder path wich copy 
-	index index.html;
-	
-	location / {
-	 try_files $uri $uri / /index.html;
-	 }
-
- }`
-- 6. Exit from vim file using below command
-   1.press esc button then shift + colon 
-   2. press wq! or x  
+ -   Add the Server configuration file.   
+   server {
+	      listen 80;
+	      server_name example.com;
+	           root /var/www/html;
+	             index index.html;
+	  location /
+       {
+	       try_files $uri $uri / /index.html;
+	     }
+     }
+-  Check the Cofiguration details on My Project do exact same as shown in Example.
+   server {
+	          listen 80;
+	          server_name 3.111.217.205;  // your ec2 instance public IP address
+	          root /data/nginx/project;   //folder path wich copy 
+	          index index.html;
+	           location / {
+	               try_files $uri $uri / /index.html;
+	            }
+     }
+   
+-  Exit from vim file using below command
+     1.press esc button then shift + colon 
+     2. press wq! or x  
  ## Restart the Nginx
   Use Below command
 - sudo nginx -t
